@@ -1,4 +1,3 @@
-// Landing.js
 import React from "react";
 import { Box, Button, Container, Grid, Typography, Card, CardContent } from "@mui/material";
 import { useNavigate } from "react-router-dom";
@@ -9,27 +8,29 @@ const LandingPage = () => {
   return (
     <Container maxWidth="lg">
       {/* Header Section */}
-      <Grid container spacing={2} alignItems="center" justifyContent="center" py={2}>
-        <Grid item xs={3} display="flex" alignItems="center">
-          <img
-            src="/images/indian-emblem.png"
-            alt="Indian Emblem"
-            style={{ height: "60px", marginRight: "15px" }}
-          />
-          <Typography variant="body1" fontWeight="bold">
-            Government of India <br />
-            Ministry of Agriculture and Farmers Welfare <br />
-            Department of Agriculture and Farmers Welfare
-          </Typography>
+      <Grid container spacing={2} alignItems="center" justifyContent="center" py={3}>
+        <Grid item xs={3} display="flex" alignItems="center" justifyContent="flex-start">
+          <img src="/images/indian-emblem.jpeg" alt="Indian Emblem" style={{ height: "100px", marginRight: "10px" }} />
+          <Box>
+            <Typography variant="body1" fontWeight="bold">
+              Government of India
+            </Typography>
+            <Typography variant="body1" fontWeight="bold">
+              Ministry of Agriculture and Farmers Welfare 
+            </Typography>
+            <Typography variant="body1" fontWeight="bold">
+              Department of Agriculture and Farmers Welfare
+            </Typography>
+          </Box>
         </Grid>
         <Grid item xs={3} textAlign="center">
-          <img src="/images/soil-logo.png" alt="Soil Logo" style={{ height: "80px" }} />
+          <img src="/images/soil-logo.png" alt="Soil Logo" style={{ height: "120px" }} />
         </Grid>
         <Grid item xs={3} textAlign="center">
-          <img src="/images/soil-health-card.png" alt="Soil Health Card" style={{ height: "80px" }} />
+          <img src="/images/soil-health-card.png" alt="Soil Health Card" style={{ height: "120px" }} />
         </Grid>
         <Grid item xs={3} textAlign="right">
-          <Button variant="contained" color="primary" onClick={() => navigate("/login")}>
+          <Button variant="contained" color="primary" size="large" onClick={() => navigate("/login")}>
             Login
           </Button>
         </Grid>
@@ -45,7 +46,7 @@ const LandingPage = () => {
         </Typography>
         <Box mt={3}>
           <Button variant="contained" color="primary" onClick={() => navigate("/register")} sx={{ mr: 2 }}>
-            Get Your Soil Health Card
+            User Registration
           </Button>
           <Button variant="outlined" color="primary" onClick={() => navigate("/login")}>
             Login
@@ -55,44 +56,33 @@ const LandingPage = () => {
 
       {/* Key Information Sections */}
       <Grid container spacing={4} mt={6}>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ boxShadow: 3, textAlign: "center", p: 2 }}>
-            <CardContent>
-              <Typography variant="h5" fontWeight="bold" color="primary">
-                What is the Soil Health Card?
-              </Typography>
-              <Typography variant="body1" mt={1}>
-                A government initiative to provide farmers with detailed soil quality reports, ensuring better yield and
-                sustainability.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ boxShadow: 3, textAlign: "center", p: 2 }}>
-            <CardContent>
-              <Typography variant="h5" fontWeight="bold" color="primary">
-                Benefits for Farmers
-              </Typography>
-              <Typography variant="body1" mt={1}>
-                Improves soil fertility, increases crop productivity, reduces fertilizer costs, and promotes
-                environmentally sustainable farming.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
-        <Grid item xs={12} md={4}>
-          <Card sx={{ boxShadow: 3, textAlign: "center", p: 2 }}>
-            <CardContent>
-              <Typography variant="h5" fontWeight="bold" color="primary">
-                How It Works?
-              </Typography>
-              <Typography variant="body1" mt={1}>
-                Step-by-step process: Sample collection → Testing → Report generation → Farmer advisory.
-              </Typography>
-            </CardContent>
-          </Card>
-        </Grid>
+        {[
+          {
+            title: "What is the Soil Health Card?",
+            description: "A government initiative to provide farmers with detailed soil quality reports, ensuring better yield and sustainability."
+          },
+          {
+            title: "Benefits for Farmers",
+            description: "Improves soil fertility, increases crop productivity, reduces fertilizer costs, and promotes environmentally sustainable farming."
+          },
+          {
+            title: "How It Works?",
+            description: "Step-by-step process: Sample collection → Testing → Report generation → Farmer advisory."
+          }
+        ].map((card, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <Card sx={{ boxShadow: 3, textAlign: "center", height: "100%", display: "flex", flexDirection: "column", justifyContent: "center", p: 3 }}>
+              <CardContent>
+                <Typography variant="h5" fontWeight="bold" color="primary">
+                  {card.title}
+                </Typography>
+                <Typography variant="body1" mt={2}>
+                  {card.description}
+                </Typography>
+              </CardContent>
+            </Card>
+          </Grid>
+        ))}
       </Grid>
 
       {/* Footer Section */}

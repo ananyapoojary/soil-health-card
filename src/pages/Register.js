@@ -10,13 +10,16 @@ import {
   FormControl,
   InputLabel,
   Grid,
+  IconButton,
+  InputAdornment
 } from "@mui/material";
+import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
-// List of Indian States & Union Territories
-const states = [
+// Complete list of Indian States & Union Territories
+const statesAndUTs = [
   "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh",
   "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka",
   "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram",
@@ -29,6 +32,7 @@ const states = [
 const RegisterPage = () => {
   const navigate = useNavigate();
   const [showPassword, setShowPassword] = useState(false);
+  const [showConfirmPassword, setShowConfirmPassword] = useState(false);
 
   // Form Validation Schema
   const validationSchema = Yup.object().shape({
@@ -40,7 +44,7 @@ const RegisterPage = () => {
     phone: Yup.string()
       .matches(/^[0-9]{10}$/, "Phone number must be exactly 10 digits")
       .required("Phone number is required"),
-    email: Yup.string().email("Invalid email").required("Email is required"),
+    email: Yup.string().email("Invalid email format").required("Email is required"),
     staffId: Yup.string().required("Staff ID is required"),
     department: Yup.string().required("Department Name is required"),
     address: Yup.string().required("Address is required"),
@@ -76,35 +80,26 @@ const RegisterPage = () => {
   });
 
   return (
-    <Container maxWidth="md">
-      <Box mt={5} p={4} boxShadow={3} borderRadius={2} bgcolor="white">
+    <Container maxWidth="md" sx={{
+      background: "linear-gradient(to right, #a8e063, #56ab2f)",
+      borderRadius: 3,
+      padding: 4,
+      boxShadow: 3,
+      mt: 5,
+    }}>
+      <Box p={4} bgcolor="white" borderRadius={2}>
         <Typography variant="h4" textAlign="center" gutterBottom>
+          Government of India
+        </Typography>
+        <Typography variant="h6" textAlign="center" gutterBottom>
+          Ministry of Agriculture and Farmers Welfare
+        </Typography>
+        <Typography variant="h5" textAlign="center" gutterBottom>
           User Registration
         </Typography>
         <form onSubmit={formik.handleSubmit}>
           <Grid container spacing={2}>
-            {/* User Type */}
-            <Grid item xs={12} sm={6}>
-              <FormControl fullWidth>
-                <InputLabel>User Type</InputLabel>
-                <Select
-                  name="userType"
-                  value={formik.values.userType}
-                  onChange={formik.handleChange}
-                  error={formik.touched.userType && Boolean(formik.errors.userType)}
-                >
-                  <MenuItem value="">None</MenuItem>
-                  <MenuItem value="central-user">Central User</MenuItem>
-                  <MenuItem value="scheme-admin">Scheme Admin</MenuItem>
-                  <MenuItem value="state-user">State User</MenuItem>
-                  <MenuItem value="district-user">District User</MenuItem>
-                  <MenuItem value="stl">STL</MenuItem>
-                  <MenuItem value="supervisor">Supervisor</MenuItem>
-                </Select>
-              </FormControl>
-            </Grid>
-
-            {/* State */}
+            {/* State Dropdown */}
             <Grid item xs={12} sm={6}>
               <FormControl fullWidth>
                 <InputLabel>State</InputLabel>
@@ -114,68 +109,52 @@ const RegisterPage = () => {
                   onChange={formik.handleChange}
                   error={formik.touched.state && Boolean(formik.errors.state)}
                 >
-                  {states.map((state, index) => (
-                    <MenuItem key={index} value={state}>
-                      {state}
-                    </MenuItem>
+                  {statesAndUTs.map((state, index) => (
+                    <MenuItem key={index} value={state}>{state}</MenuItem>
                   ))}
                 </Select>
               </FormControl>
             </Grid>
 
-            {/* Other Inputs */}
-            {[
-              { name: "district", label: "District" },
-              { name: "authority", label: "Authority" },
-              { name: "name", label: "Full Name" },
-              { name: "phone", label: "Phone Number", type: "number" },
-              { name: "email", label: "Email", type: "email" },
-              { name: "staffId", label: "Staff ID" },
-              { name: "department", label: "Department Name" },
-              { name: "address", label: "Address" },
-              { name: "username", label: "Username" },
-            ].map((field, index) => (
+            {/* Other Fields */}
+            {["district", "authority", "name", "phone", "email", "staffId", "department", "address", "username"].map((field, index) => (
               <Grid item xs={12} sm={6} key={index}>
                 <TextField
                   fullWidth
-                  label={field.label}
-                  name={field.name}
-                  type={field.type || "text"}
-                  value={formik.values[field.name]}
+                  label={field.charAt(0).toUpperCase() + field.slice(1)}
+                  name={field}
+                  value={formik.values[field]}
                   onChange={formik.handleChange}
-                  error={formik.touched[field.name] && Boolean(formik.errors[field.name])}
-                  helperText={formik.touched[field.name] && formik.errors[field.name]}
+                  error={formik.touched[field] && Boolean(formik.errors[field])}
+                  helperText={formik.touched[field] && formik.errors[field]}
                 />
               </Grid>
             ))}
 
-            {/* Password */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Password"
-                name="password"
-                type="password"
-                value={formik.values.password}
-                onChange={formik.handleChange}
-                error={formik.touched.password && Boolean(formik.errors.password)}
-                helperText={formik.touched.password && formik.errors.password}
-              />
-            </Grid>
-
-            {/* Confirm Password */}
-            <Grid item xs={12} sm={6}>
-              <TextField
-                fullWidth
-                label="Confirm Password"
-                name="confirmPassword"
-                type="password"
-                value={formik.values.confirmPassword}
-                onChange={formik.handleChange}
-                error={formik.touched.confirmPassword && Boolean(formik.errors.confirmPassword)}
-                helperText={formik.touched.confirmPassword && formik.errors.confirmPassword}
-              />
-            </Grid>
+            {/* Password Fields */}
+            {["password", "confirmPassword"].map((field, index) => (
+              <Grid item xs={12} sm={6} key={index}>
+                <TextField
+                  fullWidth
+                  label={field === "password" ? "Password" : "Confirm Password"}
+                  name={field}
+                  type={field === "password" ? (showPassword ? "text" : "password") : (showConfirmPassword ? "text" : "password")}
+                  value={formik.values[field]}
+                  onChange={formik.handleChange}
+                  error={formik.touched[field] && Boolean(formik.errors[field])}
+                  helperText={formik.touched[field] && formik.errors[field]}
+                  InputProps={{
+                    endAdornment: (
+                      <InputAdornment position="end">
+                        <IconButton onClick={() => field === "password" ? setShowPassword(!showPassword) : setShowConfirmPassword(!showConfirmPassword)}>
+                          {field === "password" ? (showPassword ? <VisibilityOff /> : <Visibility />) : (showConfirmPassword ? <VisibilityOff /> : <Visibility />)}
+                        </IconButton>
+                      </InputAdornment>
+                    )
+                  }}
+                />
+              </Grid>
+            ))}
 
             {/* Buttons */}
             <Grid item xs={12} textAlign="center">
