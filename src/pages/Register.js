@@ -1,20 +1,21 @@
 import React, { useState } from "react";
-import { Box, Button, Container, TextField, Typography, MenuItem, Select, FormControl, InputLabel, Grid, IconButton, InputAdornment, Alert, CircularProgress, LinearProgress, Divider, useMediaQuery, useTheme } from "@mui/material";
+import { Box, Button, Grid, TextField, Typography, MenuItem, Select, FormControl, InputLabel, Divider, Alert, CircularProgress, LinearProgress, useMediaQuery, useTheme, IconButton, InputAdornment } from "@mui/material";
 import { Visibility, VisibilityOff } from "@mui/icons-material";
 import { useNavigate } from "react-router-dom";
 import { useFormik } from "formik";
 import * as Yup from "yup";
 
+// States and user types arrays
 const statesAndUTs = [
-    "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
-    "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
-    "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
-    "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", 
-    "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", 
-    "Uttar Pradesh", "Uttarakhand", "West Bengal", 
-    "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", 
-    "Lakshadweep", "Delhi", "Puducherry", "Ladakh", "Lakshadweep"
-];  
+  "Andhra Pradesh", "Arunachal Pradesh", "Assam", "Bihar", "Chhattisgarh", 
+  "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", 
+  "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", 
+  "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", 
+  "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", 
+  "Uttar Pradesh", "Uttarakhand", "West Bengal", 
+  "Andaman and Nicobar Islands", "Chandigarh", "Dadra and Nagar Haveli and Daman and Diu", 
+  "Lakshadweep", "Delhi", "Puducherry", "Ladakh", "Lakshadweep"
+];
 
 const userTypes = ["None", "Central User", "Scheme Admin", "State User", "District User", "STL", "Supervisor"];
 
@@ -83,15 +84,16 @@ const RegisterPage = () => {
   return (
     <Box
       sx={{
-        background: "linear-gradient(to bottom, #768a51, #768a51)", // Dark sap green ombre
-
+        backgroundImage: 'url(/images/reg-bg.jpg)', // Background image
+        backgroundSize: 'cover',
+        backgroundPosition: 'center',
         height: "100vh",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
       }}
     >
-      <Box sx={{ background: "rgba(200, 248, 250, 0.8)", borderRadius: 2, padding: 4, boxShadow: 3, width: "100%", maxWidth: "700px" }}>
+      <Box sx={{ bgcolor: "rgba(255, 255, 230, 0.85)", borderRadius: 2, padding: 4, boxShadow: 3, width: "100%", maxWidth: "700px" }}>
         {/* Header Section with Images */}
         <Box display="flex" justifyContent="space-between" alignItems="center" my={2}>
           <Box textAlign="center">
