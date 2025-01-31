@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Button, Container, TextField, Typography } from "@mui/material";
+import { Box, Button, Container, TextField, Typography, MenuItem, Select, FormControl, InputLabel } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LoginPage = () => {
@@ -18,7 +18,18 @@ const LoginPage = () => {
     <Container maxWidth="sm">
       <Box mt={5} textAlign="center">
         <Typography variant="h4">Login</Typography>
-        <TextField fullWidth label="User Type" name="usertype" onChange={handleChange} margin="normal" />
+        <FormControl fullWidth margin="normal">
+          <InputLabel>User Type</InputLabel>
+          <Select name="usertype" value={formData.usertype} onChange={handleChange}>
+            <MenuItem value="">None</MenuItem>
+            <MenuItem value="central-user">Central User</MenuItem>
+            <MenuItem value="scheme-admin">Scheme Admin</MenuItem>
+            <MenuItem value="state-user">State User</MenuItem>
+            <MenuItem value="district-user">District User</MenuItem>
+            <MenuItem value="stl">STL</MenuItem>
+            <MenuItem value="supervisor">Supervisor</MenuItem>
+          </Select>
+        </FormControl>
         <TextField fullWidth label="Email" name="email" onChange={handleChange} margin="normal" />
         <TextField fullWidth label="Password" name="password" type="password" onChange={handleChange} margin="normal" />
         <Button variant="contained" color="primary" onClick={handleSubmit} sx={{ mt: 2 }}>
