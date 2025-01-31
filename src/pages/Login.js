@@ -28,7 +28,7 @@ const validationSchema = Yup.object({
 const Login = () => {
   const [message, setMessage] = useState("");
   const [showPassword, setShowPassword] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState(false); // ✅ Track login state
+  const [isLoggedIn, setIsLoggedIn] = useState(false); 
 
   const formik = useFormik({
     initialValues: {
@@ -39,47 +39,61 @@ const Login = () => {
     validationSchema: validationSchema,
     onSubmit: (values) => {
       console.log("Login Attempt:", values);
-      setMessage("Successfully logged in!");
-      setIsLoggedIn(true); // ✅ Mark as logged in
+      setMessage("✅ Successfully logged in!");
+      setIsLoggedIn(true);
+
+      // Hide message after 3 seconds
+      setTimeout(() => {
+        setIsLoggedIn(false);
+      }, 3000);
     },
   });
 
   return (
     <Box
       sx={{
-        backgroundImage: "url('/images/login-bg.jpg')",
-        backgroundSize: "cover",
-        backgroundPosition: "center",
+        position: "relative",
         minHeight: "100vh",
         display: "flex",
         alignItems: "center",
         justifyContent: "center",
+        background: "url('/images/login-bg.jpg') center/cover no-repeat",
+        "&::before": {
+          content: '""',
+          position: "absolute",
+          top: 0,
+          left: 0,
+          width: "100%",
+          height: "100%",
+          backgroundColor: "rgba(0, 0, 0, 0.5)", // ✅ Dark overlay for readability
+          zIndex: 1,
+        },
       }}
     >
-      <Container maxWidth="sm">
+      <Container maxWidth="sm" sx={{ position: "relative", zIndex: 2 }}>
         <Box
           p={4}
           boxShadow={6}
           borderRadius={3}
-          bgcolor="rgba(255, 255, 255, 0.7)" // ✅ Slightly more visible background
+          bgcolor="rgba(255, 255, 230, 0.85)" // ✅ Improved contrast
           sx={{ width: "100%", maxWidth: 480 }}
         >
           {/* Header Section */}
           <Box textAlign="center" my={2}>
-            <img src="/images/indian-emblem.jpeg" alt="Emblem" style={{ height: "80px", marginBottom: "10px" }} />
-            <Typography variant="h5" fontWeight="bold">
+            <img src="/images/indian-emblem.jpeg" alt="Emblem of India" style={{ height: "70px", marginBottom: "10px" }} />
+            <Typography variant="h6" fontWeight="bold">
               Government of India
             </Typography>
-            <Typography variant="h6">Ministry of Agriculture and Farmers Welfare</Typography>
-            <Typography variant="body1">Department of Agriculture and Farmers Welfare</Typography>
+            <Typography variant="subtitle1">Ministry of Agriculture and Farmers Welfare</Typography>
+            <Typography variant="body2">Department of Agriculture and Farmers Welfare</Typography>
           </Box>
 
-          <Divider sx={{ my: 3 }} />
+          <Divider sx={{ my: 2 }} />
 
           {/* Sign In Header */}
           <Box display="flex" alignItems="center" justifyContent="center">
             <PowerSettingsNewRounded sx={{ fontSize: 30, color: "green", mr: 1 }} />
-            <Typography variant="h4" textAlign="center" fontWeight="bold">
+            <Typography variant="h5" textAlign="center" fontWeight="bold">
               Sign In
             </Typography>
           </Box>
@@ -87,7 +101,7 @@ const Login = () => {
           {/* Success Message */}
           {isLoggedIn && (
             <Alert severity="success" sx={{ my: 2, fontSize: "1rem", textAlign: "center" }}>
-              ✅ Successfully logged in!
+              {message}
             </Alert>
           )}
 
@@ -95,7 +109,12 @@ const Login = () => {
             {/* User Type Dropdown */}
             <FormControl fullWidth margin="normal" error={formik.touched.userType && Boolean(formik.errors.userType)}>
               <InputLabel>User Type</InputLabel>
-              <Select name="userType" value={formik.values.userType} onChange={formik.handleChange} onBlur={formik.handleBlur}>
+              <Select
+                name="userType"
+                value={formik.values.userType}
+                onChange={formik.handleChange}
+                onBlur={formik.handleBlur}
+              >
                 <MenuItem value="" disabled>Select User Type</MenuItem>
                 <MenuItem value="central_user">Central User</MenuItem>
                 <MenuItem value="scheme_admin">Scheme Admin</MenuItem>
@@ -152,7 +171,7 @@ const Login = () => {
               color="primary"
               fullWidth
               sx={{ mt: 2, py: 1.5, fontWeight: "bold", fontSize: "1rem" }}
-              disabled={!formik.isValid} // ✅ Enabled only when email format is correct
+              disabled={!formik.dirty || !formik.isValid} // ✅ Ensures user interaction before enabling
             >
               Login
             </Button>
@@ -171,9 +190,9 @@ const Login = () => {
                 mt: 1,
                 fontWeight: "bold",
                 py: 1.2,
-                borderColor: "#1976d2", // ✅ Makes it more visible
+                borderColor: "#1976d2", // ✅ Improved contrast
                 color: "#1976d2",
-                "&:hover": { backgroundColor: "#e3f2fd" }, // ✅ Adds hover effect
+                "&:hover": { backgroundColor: "#e3f2fd" }, // ✅ Hover effect
               }}
             >
               User Registration
