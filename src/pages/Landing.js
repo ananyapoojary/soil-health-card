@@ -1,29 +1,36 @@
-import { Container, Typography, Button, Box, Paper } from "@mui/material";
+import React from "react";
+import { Box, Button, Container, Grid, Typography } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function Landing() {
+const LandingPage = () => {
   const navigate = useNavigate();
 
   return (
-    <Container maxWidth="md" sx={{ textAlign: "center", mt: 5 }}>
-      <Paper elevation={3} sx={{ padding: 4, backgroundColor: "#A5D6A7", borderRadius: 3 }}>
-        <Typography variant="h3" gutterBottom color="primary">
-          Health Card System
-        </Typography>
-        <Typography variant="body1" paragraph>
-          A Health Card provides seamless access to medical records and healthcare services efficiently.
-        </Typography>
-        <Box mt={3}>
-          <Button 
-            variant="contained" 
-            color="secondary" 
-            sx={{ transition: "0.3s", "&:hover": { backgroundColor: "#689F38" } }} 
-            onClick={() => navigate("/login")}
-          >
-            Login
-          </Button>
+    <Container maxWidth="lg">
+      <Box display="flex" justifyContent="space-between" alignItems="center" py={2}>
+        <Box display="flex" alignItems="center">
+          <img
+            src="/images/indian-emblem.png"
+            alt="Indian Emblem"
+            style={{ height: "60px", marginRight: "15px" }}
+          />
+          <Typography variant="body1" fontWeight="bold">
+            Government of India <br />
+            Ministry of Agriculture and Farmers Welfare <br />
+            Department of Agriculture and Farmers Welfare
+          </Typography>
         </Box>
-      </Paper>
+        <img
+          src="/images/soil-health-card.png"
+          alt="Soil Health Card"
+          style={{ height: "80px" }}
+        />
+        <Button variant="contained" color="primary" onClick={() => navigate("/login")}>
+          Login
+        </Button>
+      </Box>
     </Container>
   );
-}
+};
+
+export default LandingPage;
