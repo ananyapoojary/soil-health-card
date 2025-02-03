@@ -8,35 +8,50 @@ const LandingPage = () => {
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
 
   return (
-    <Container maxWidth="lg">
+    <Container maxWidth="xl">
       {/* Header Section */}
-      <Grid container spacing={2} alignItems="center" justifyContent="center" py={3}>
-        <Grid item xs={12} md={3} display="flex" alignItems="center" justifyContent={isSmallScreen ? "center" : "flex-start"}>
+      <Grid container spacing={5} alignItems="center" justifyContent="center" py={3}>
+        <Grid item xs={15} md={5} display="flex" alignItems="center" justifyContent={isSmallScreen ? "center" : "flex-start"}>
           <img
             src="/images/indian-emblem.jpeg"
             alt="Indian Emblem representing the Government of India"
             style={{ height: "80px", marginRight: "10px" }}
           />
-          <Box textAlign={isSmallScreen ? "center" : "left"}>
-            <Typography variant="body1" fontWeight="bold">Government of India</Typography>
-            <Typography variant="body1" fontWeight="bold">Ministry of Agriculture and Farmers Welfare</Typography>
-            <Typography variant="body1" fontWeight="bold">Department of Agriculture and Farmers Welfare</Typography>
-          </Box>
+         <Box textAlign="center" width="100%">
+  <Typography variant="h4" fontWeight="bold">Government of India</Typography>
+  <Typography variant="h5" fontWeight="bold">Ministry of Agriculture and Farmers Welfare</Typography>
+  <Typography variant="h6" fontWeight="bold">Department of Agriculture and Farmers Welfare</Typography>
+</Box>
+
         </Grid>
 
-        <Grid item xs={12} md={3} textAlign="center">
+        <Grid item xs={10} md={2} textAlign="center">
           <img src="/images/soil-logo.png" alt="Soil Health Card Logo" style={{ height: "100px" }} />
         </Grid>
 
-        <Grid item xs={12} md={3} textAlign="center">
+        <Grid item xs={10} md={3} textAlign="center">
           <img src="/images/soil-health-card.png" alt="Soil Health Card Icon" style={{ height: "100px" }} />
         </Grid>
 
-        <Grid item xs={12} md={3} textAlign={isSmallScreen ? "center" : "right"}>
-          <Button variant="contained" color="primary" size="large" onClick={() => navigate("/login")}>
-            Login
-          </Button>
-        </Grid>
+        <Grid
+  item
+  xs={12}
+  md={5}
+  display="flex"
+  justifyContent={isSmallScreen ? "center" : "flex-end"}
+  alignItems="center"
+>
+  <Button variant="contained" color="primary" size="large" onClick={() => navigate("/login")}>
+    Login
+  </Button>
+  <Button variant="text" color="secondary" sx={{ mx: 5 }} onClick={() => navigate("/about")}>
+    About Us
+  </Button>
+  <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={() => navigate("/contact")}>
+    Contact Us
+  </Button>
+</Grid>
+
       </Grid>
 
       {/* Hero Section */}
@@ -54,6 +69,7 @@ const LandingPage = () => {
           <Button variant="outlined" color="secondary" onClick={() => navigate("/login")}>
             Login
           </Button>
+          
         </Box>
       </Box>
 
