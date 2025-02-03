@@ -8,6 +8,8 @@ import ContactUs from "./pages/ContactUs";
 import { ThemeProvider } from "@mui/material/styles";
 import earthyTheme from './earthyTheme'; // Import your custom theme
 
+
+
 const App = () => {
   return (
     <ThemeProvider theme={earthyTheme}>  {/* Wrap your components with ThemeProvider */}
@@ -18,6 +20,7 @@ const App = () => {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          
           
         </Routes>
       </Router>

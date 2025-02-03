@@ -1,11 +1,25 @@
-import React from "react";
-import { Box, Button, Container, Grid, Typography, useMediaQuery, useTheme } from "@mui/material";
+import React, { useState } from "react";
+import { Box, Button, Container, Grid, Typography, useMediaQuery, useTheme, Menu, MenuItem } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
 const LandingPage = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const isSmallScreen = useMediaQuery(theme.breakpoints.down("md"));
+  const [anchorEl, setAnchorEl] = useState(null);
+
+  const handleMenuClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleMenuClose = () => {
+    setAnchorEl(null);
+  };
+
+  const handleRedirect = (path) => {
+    navigate(path);
+    handleMenuClose();
+  };
 
   return (
     <Container maxWidth="xl">
@@ -17,12 +31,11 @@ const LandingPage = () => {
             alt="Indian Emblem representing the Government of India"
             style={{ height: "80px", marginRight: "10px" }}
           />
-         <Box textAlign="center" width="100%">
-  <Typography variant="h4" fontWeight="bold">Government of India</Typography>
-  <Typography variant="h5" fontWeight="bold">Ministry of Agriculture and Farmers Welfare</Typography>
-  <Typography variant="h6" fontWeight="bold">Department of Agriculture and Farmers Welfare</Typography>
-</Box>
-
+          <Box textAlign="center" width="100%">
+            <Typography variant="h4" fontWeight="bold">Government of India</Typography>
+            <Typography variant="h5" fontWeight="bold">Ministry of Agriculture and Farmers Welfare</Typography>
+            <Typography variant="h6" fontWeight="bold">Department of Agriculture and Farmers Welfare</Typography>
+          </Box>
         </Grid>
 
         <Grid item xs={10} md={2} textAlign="center">
@@ -33,26 +46,33 @@ const LandingPage = () => {
           <img src="/images/soil-health-card.png" alt="Soil Health Card Icon" style={{ height: "100px" }} />
         </Grid>
 
-        <Grid
-  item
-  xs={12}
-  md={5}
-  display="flex"
-  justifyContent={isSmallScreen ? "center" : "flex-end"}
-  alignItems="center"
->
-  <Button variant="contained" color="primary" size="large" onClick={() => navigate("/login")}>
-    Login
-  </Button>
-  <Button variant="text" color="secondary" sx={{ mx: 5 }} onClick={() => navigate("/about")}>
-    About Us
-  </Button>
-  <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={() => navigate("/contact")}>
-    Contact Us
-  </Button>
-  
-</Grid>
-
+        <Grid item xs={12} md={5} display="flex" justifyContent={isSmallScreen ? "center" : "flex-end"} alignItems="center">
+          <Button variant="contained" color="primary" size="large" onClick={() => navigate("/login")}>
+            Login
+          </Button>
+          <Button variant="text" color="secondary" sx={{ mx: 5 }} onClick={() => navigate("/about")}>
+            About Us
+          </Button>
+          <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={() => navigate("/contact")}>
+            Contact Us
+          </Button>
+          <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={handleMenuClick}>
+            Related Links
+          </Button>
+          <Menu
+            anchorEl={anchorEl}
+            open={Boolean(anchorEl)}
+            onClose={handleMenuClose}
+          >
+            <MenuItem onClick={() => handleRedirect("/Mkisan")}>mKisan</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/farmer-portal")}>Farmer Portal</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/crop-insurance")}>Crop Insurance</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/agricoop")}>Agricoop</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/ifms")}>Integrated Fertilizer Management System</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/kisan-suvidha")}>Kisan Suvidha</MenuItem>
+            <MenuItem onClick={() => handleRedirect("/digital-seva-connect")}>Digital Seva Connect</MenuItem>
+          </Menu>
+        </Grid>
       </Grid>
 
       {/* Hero Section */}
@@ -70,7 +90,6 @@ const LandingPage = () => {
           <Button variant="outlined" color="secondary" onClick={() => navigate("/login")}>
             Login
           </Button>
-          
         </Box>
       </Box>
 
