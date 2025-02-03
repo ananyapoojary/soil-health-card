@@ -18,6 +18,7 @@ const App = () => {
           <Route path="/register" element={<RegistrationPage />} />
           <Route path="/about" element={<AboutUs />} />
           <Route path="/contact" element={<ContactUs />} />
+          
         </Routes>
       </Router>
     </ThemeProvider>

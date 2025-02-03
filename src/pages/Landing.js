@@ -50,6 +50,7 @@ const LandingPage = () => {
   <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={() => navigate("/contact")}>
     Contact Us
   </Button>
+  
 </Grid>
 
       </Grid>
