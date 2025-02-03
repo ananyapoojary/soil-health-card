@@ -8,31 +8,37 @@ const AboutUs = () => {
 
   return (
     <Container maxWidth="xl">
-      
-
       {/* Header Section */}
       <Grid container spacing={5} alignItems="center" justifyContent="center" py={3}>
         {/* Government Emblem & Title */}
         <Grid item xs={12} md={5} display="flex" alignItems="center" justifyContent={isSmallScreen ? "center" : "flex-start"}>
           <img
             src="/images/indian-emblem.jpeg"
-            alt="Indian Emblem representing the Government of India"
-            style={{ height: "80px", marginRight: "10px" }}
+            alt="Indian Emblem"
+            style={{ height: "80px", marginRight: "10px", borderRadius: "5px" }}
           />
           <Box textAlign="center">
-            <Typography variant="h4" fontWeight="bold">Government of India</Typography>
-            <Typography variant="h5" fontWeight="bold">Ministry of Agriculture and Farmers Welfare</Typography>
-            <Typography variant="h6" fontWeight="bold">Department of Agriculture and Farmers Welfare</Typography>
+            <Typography variant="h4" fontWeight="bold" color="black">Government of India</Typography>
+            <Typography variant="h5" fontWeight="bold" color="black">Ministry of Agriculture and Farmers Welfare</Typography>
+            <Typography variant="h6" fontWeight="bold" color="black">Department of Agriculture and Farmers Welfare</Typography>
           </Box>
         </Grid>
 
         {/* Soil Health Card Logos */}
         <Grid item xs={6} md={2} textAlign="center">
-          <img src="/images/soil-logo.png" alt="Soil Health Card Logo" style={{ height: "100px" }} />
+          <img
+            src="/images/soil-logo.png"
+            alt="Soil Health Card Logo"
+            style={{ height: "100px", borderRadius: "10px", boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)" }}
+          />
         </Grid>
 
         <Grid item xs={6} md={3} textAlign="center">
-          <img src="/images/soil-health-card.png" alt="Soil Health Card Icon" style={{ height: "100px" }} />
+          <img
+            src="/images/soil-health-card.png"
+            alt="Soil Health Card Icon"
+            style={{ height: "100px", borderRadius: "10px", boxShadow: "0 0 15px rgba(0, 0, 0, 0.1)" }}
+          />
         </Grid>
 
         {/* Navigation Buttons */}
@@ -40,7 +46,7 @@ const AboutUs = () => {
           <Button variant="text" color="secondary" size="large" onClick={() => navigate("/login")}>
             Login
           </Button>
-          <Button variant="contained" color="primary" sx={{ mx: 5 }} onClick={() => navigate("/about")}>
+          <Button variant="contained" color="primary" sx={{ mx: 2 }} onClick={() => navigate("/about")}>
             About Us
           </Button>
           <Button variant="text" color="secondary" sx={{ mx: 1 }} onClick={() => navigate("/contact")}>
@@ -57,13 +63,13 @@ const AboutUs = () => {
         <img
           src="/images/abt-img.jpg"
           alt="About Soil Health Card"
-          style={{ width: "100%", height: "auto", maxHeight: "400px" }}
+          style={{ width: "100%", height: "auto", maxHeight: "400px", objectFit: "cover", borderRadius: "8px" }}
         />
       </Box>
 
       {/* About Soil Health Card Scheme */}
       <Box sx={{ py: 5 }}>
-        <Typography variant="h4" fontWeight="bold" textAlign="center" mb={2}>
+        <Typography variant="h4" fontWeight="bold" textAlign="center" mb={2} color="primary">
           ABOUT SOIL HEALTH CARD SCHEME
         </Typography>
         <Typography variant="h5" color="green" textAlign="center" fontStyle="italic" fontWeight="bold">
@@ -80,10 +86,10 @@ const AboutUs = () => {
 
         {/* Key Features Section */}
         <Box mt={4}>
-          <Typography variant="h5" fontWeight="bold" mb={2}>
+          <Typography variant="h5" fontWeight="bold" mb={2} color="primary">
             Key Features of the Soil Health Card Scheme
           </Typography>
-          <ul>
+          <ul style={{ paddingLeft: "20px" }}>
             <li>
               <Typography variant="body1">
                 <strong>Soil Report:</strong> Farmers receive a report in the form of a soil card, containing all details about their farm’s soil.
@@ -99,10 +105,10 @@ const AboutUs = () => {
 
         {/* Benefits Section */}
         <Box mt={4}>
-          <Typography variant="h5" fontWeight="bold" mb={2}>
+          <Typography variant="h5" fontWeight="bold" mb={2} color="primary">
             Benefits of the Soil Health Card Scheme
           </Typography>
-          <ul>
+          <ul style={{ paddingLeft: "20px" }}>
             <li>
               <Typography variant="body1">
                 Farmers will get a proper soil health record, allowing them to plan future crops and land use efficiently.
