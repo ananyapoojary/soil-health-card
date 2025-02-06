@@ -71,6 +71,7 @@ const LandingPage = () => {
             <MenuItem onClick={() => handleRedirect("/ifms")}>Integrated Fertilizer Management System</MenuItem>
             <MenuItem onClick={() => handleRedirect("/kisan-suvidha")}>Kisan Suvidha</MenuItem>
             <MenuItem onClick={() => handleRedirect("/digital-seva-connect")}>Digital Seva Connect</MenuItem>
+
           </Menu>
         </Grid>
       </Grid>
